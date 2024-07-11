@@ -1,3 +1,4 @@
+## This just a tool I'm tinkering with, so YMMV
 
 # Hugging Face Model Importer for Ollama
 
@@ -11,6 +12,7 @@ This project provides a Python script to import a specific model file from a Hug
 - Creates a metafile required by Ollama with appropriate parameters.
 - Prompts the user to confirm running the `ollama create` command.
 - Allows the user to specify a name for the model when running `ollama create`.
+- Convert Hugging Face Safe Tensor models to Guff then import into Ollama.
 
 ## Requirements
 
@@ -18,6 +20,8 @@ This project provides a Python script to import a specific model file from a Hug
 - `huggingface_hub` library
 - `subprocess` module (part of Python standard library)
 - `ollama` command-line tool
+
+For sftoguff.py, you'll llama.cpp installed and functional on your system.
 
 ## Installation
 
@@ -32,7 +36,7 @@ This project provides a Python script to import a specific model file from a Hug
 
 1. Run the script:
    ```sh
-   python import_huggingface_to_ollama.py
+   python main.py
    ```
 
 2. Enter the Hugging Face model ID when prompted.
@@ -44,6 +48,22 @@ This project provides a Python script to import a specific model file from a Hug
 5. Confirm if you want to run the `ollama create` command:
    - If yes, provide a name for the model (default is the model name without the `.guff` extension).
    - If no, the script will print the command for you to run manually after editing the `metafile.txt`.
+
+For sftoguff.py - 
+
+### For SafeTensors models like microsoft/Phi-3-mini-128k-instruct
+
+1. Run the script:
+   ```sh
+   python sftoguff.py
+   ```
+
+2. Enter the Hugging Face model ID when prompted.
+
+3. The script will download and convert the model to a .guff file.
+
+4. It will ask you if want to import into ollama, and if so, it'll launch main.py
+
 
 ## Example
 
