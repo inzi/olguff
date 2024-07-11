@@ -1,4 +1,4 @@
-## This just a tool I'm tinkering with, so YMMV
+## This is just a tool I'm tinkering with, so YMMV
 
 # Hugging Face Model Importer for Ollama
 
