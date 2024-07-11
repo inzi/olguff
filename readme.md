@@ -49,8 +49,6 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
    - If yes, provide a name for the model (default is the model name without the `.guff` extension).
    - If no, the script will print the command for you to run manually after editing the `metafile.txt`.
 
-For sftoguff.py - 
-
 ### For SafeTensors models like microsoft/Phi-3-mini-128k-instruct
 
 1. Run the script:
