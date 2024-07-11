@@ -45,12 +45,15 @@ if dodownload:
                     local_dir_use_symlinks=False, revision="main")
 
 # run python llama.cpp/convert.py 
-guff_folder= os.path.join(os.getcwd(),"sf", f"{model_name}-guff")
+guff_folder = os.path.join(os.getcwd(),"sf", f"{model_name}-guff")
+guff_folder = os.path.abspath(guff_folder)
 guff_file = os.path.join(os.getcwd(),"sf", guff_folder, f"{model_name}.guff")
 guff_file = os.path.abspath(guff_file)
 dogulffile=True
 if not os.path.exists(guff_folder):
-    os.makedirs(os.path.dirname(guff_folder), exist_ok=True)
+    guff_dir = os.path.dirname(guff_file)
+    print(f"Creating Guff folder: {guff_dir}")
+    os.makedirs(guff_dir, exist_ok=True)
 
 if os.path.exists(guff_file):
     regenerateguff = input(f"'{guff_file}' already exists. Do you want to recreate it? (y/[n]): ").strip().lower()
