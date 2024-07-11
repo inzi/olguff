@@ -21,7 +21,7 @@ This project provides a Python script to import a specific model file from a Hug
 - `subprocess` module (part of Python standard library)
 - `ollama` command-line tool
 
-For sftoguff.py, you'll llama.cpp installed and functional on your system.
+For sftoguff.py, you'll need llama.cpp installed and functional on your system.
 
 ## Installation
 
