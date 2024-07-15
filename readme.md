@@ -14,6 +14,8 @@ This project provides a Python script to import a specific model file from a Hug
 - Allows the user to specify a name for the model when running `ollama create`.
 - Convert Hugging Face Safe Tensor models to Guff then import into Ollama.
 
+## Attributions
+
 ## Requirements
 
 - Python 3.x
