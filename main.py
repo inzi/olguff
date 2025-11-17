@@ -48,88 +48,88 @@ def download_model(model_id, local_dir):
 def create_meta_file(local_dir, file_path):
     # Create the metafile for Ollama
     meta_file_content = f"""
-## Metafile for the model
+# - Metafile for the model
 FROM {file_path}
 
-## SYSTEM
-## The system message used to specify custom behavior.
+# - SYSTEM
+# - The system message used to specify custom behavior.
 # SYSTEM You are Mario from super mario bros, acting as an assistant.
 
-## ADAPTER 
-## The ADAPTER instruction is an optional instruction that specifies any LoRA adapter that should apply to the base model. The value of this instruction should be an absolute path or a path relative to the Modelfile and the file must be in a GGML file format. The adapter should be tuned from the base model otherwise the behaviour is undefined.
+# - ADAPTER
+# - The ADAPTER instruction is an optional instruction that specifies any LoRA adapter that should apply to the base model. The value of this instruction should be an absolute path or a path relative to the Modelfile and the file must be in a GGML file format. The adapter should be tuned from the base model otherwise the behaviour is undefined.
 # ADAPTER ./ollama-lora.bin
 
-## LICENSE
-## The LICENSE instruction allows you to specify the legal license under which the model used with this Modelfile is shared or distributed.
+# - LICENSE
+# - The LICENSE instruction allows you to specify the legal license under which the model used with this Modelfile is shared or distributed.
 # LICENSE "" <license text> ""
 
 
-## MESSAGE
-## The MESSAGE instruction allows you to specify a message history for the model to use when responding. Use multiple iterations of the MESSAGE command to build up a conversation which will guide the model to answer in a similar way.
+# - MESSAGE
+# - The MESSAGE instruction allows you to specify a message history for the model to use when responding. Use multiple iterations of the MESSAGE command to build up a conversation which will guide the model to answer in a similar way.
 # MESSAGE <role> <message>
 
-## Valid Roles: 
+# - Valid Roles:
 # user An example message of what the user could have asked.
 # system An example message of what the user could have asked.
 # assistant An example message of how the model should respond.
 
-## mirostat
-## Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)
-# PARMETER mirostat 0
+# - mirostat
+# - Enable Mirostat sampling for controlling perplexity. (default: 0, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0)
+# PARAMETER mirostat 0
 
-## mirostat_eta
-## Influences how quickly the algorithm responds to feedback from the generated text. A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1)
+# - mirostat_eta
+# - Influences how quickly the algorithm responds to feedback from the generated text. A lower learning rate will result in slower adjustments, while a higher learning rate will make the algorithm more responsive. (Default: 0.1)
 # PARAMETER mirostat_eta 0.1
 
-## mirostat_tau
-## Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0)
+# - mirostat_tau
+# - Controls the balance between coherence and diversity of the output. A lower value will result in more focused and coherent text. (Default: 5.0)
 # PARAMETER mirostat_tau 5.0
 
-## num_ctx
-## Sets the size of the context window used to generate the next token. (Default: 2048)
+# - num_ctx
+# - Sets the size of the context window used to generate the next token. (Default: 2048)
 # PARAMETER num_ctx 2048
 
-## repeat_last_n
-## Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx)
+# - repeat_last_n
+# - Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx)
 # PARAMETER repeat_last_n 64
 
-## repeat_penalty
-## Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 1.1)
+# - repeat_penalty
+# - Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 1.1)
 # PARAMETER repeat_penalty 1.1
 
-## temperature
-## The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8)
+# - temperature
+# - The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8)
 # PARAMETER temperature 0.8
 
-## seed
-## Sets the random number generator seed to use for generation. Setting this to a specific value will make the model generate the same text for the same prompt. (Default: 0, 0 = random)
+# - seed
+# - Sets the random number generator seed to use for generation. Setting this to a specific value will make the model generate the same text for the same prompt. (Default: 0, 0 = random)
 # PARAMETER seed 0
 
-## stop
-## Sets the stop sequences to use. When generating text, the model will stop at the first occurrence of any of these strings. (Default: ["<|im_end|>"])
+# - stop
+# - Sets the stop sequences to use. When generating text, the model will stop at the first occurrence of any of these strings. (Default: ["<|im_end|>"])
 # PARAMETER stop ["<|im_end|>", "User:", "System:"]
 
-## tfs_z
-## Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting. (default: 1)
+# - tfs_z
+# - Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting. (default: 1)
 # PARAMETER tfs_z 1
 
-## num_prediict
-## Maximum number of tokens to predict when generating text. (Default: 128, -1 = infinite generation, -2 = fill context)
+# - num_prediict
+# - Maximum number of tokens to predict when generating text. (Default: 128, -1 = infinite generation, -2 = fill context)
 # PARAMETER num_predict 128
 
-## top_k
-## Reduces the probability of generating nonsense. A higher value (e.g. 50) will give more diverse answers, while a lower value (e.g. 10) will make answers more focused and deterministic. (Default: 40)
+# - top_k
+# - Reduces the probability of generating nonsense. A higher value (e.g. 50) will give more diverse answers, while a lower value (e.g. 10) will make answers more focused and deterministic. (Default: 40)
 # PARAMETER top_k 40
 
-## top_p
-## Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9)
+# - top_p
+# - Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9)
 # PARAMETER top_p 0.9
 
 
-## This is an EXTREMELY helpful video on how to create the template:
-## https://www.youtube.com/watch?v=bXf2Cxf3Wk0
+# - This is an EXTREMELY helpful video on how to create the template:
+# - https://www.youtube.com/watch?v=bXf2Cxf3Wk0
 
-## TEMPLATE ""{{{{ if .System }}}}system {{{{ .System }}}}{{{{ end }}}}{{{{ if .Prompt }}}}user {{{{ .Prompt }}}}{{{{ end }}}}assistant {{{{ .Response }}}}""
+# - TEMPLATE ""{{{{ if .System }}}}system {{{{ .System }}}}{{{{ end }}}}{{{{ if .Prompt }}}}user {{{{ .Prompt }}}}{{{{ end }}}}assistant {{{{ .Response }}}}""
 
 """
 
