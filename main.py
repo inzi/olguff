@@ -134,13 +134,10 @@ FROM {file_path}
 """
 
     meta_file_content = meta_file_content + "\n"
-    meta_file_content = meta_file_content + """TEMPLATE {{ if .System }}<|start_header_id|>system<|end_header_id|>
-
+    meta_file_content = meta_file_content + """TEMPLATE \"\"\"{{ if .System }}<|start_header_id|>system<|end_header_id|>
 {{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
-
 {{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
-
-{{ .Response }}<|eot_id|>
+{{ .Response }}<|eot_id|>\"\"\"
 """
 
     meta_file_path = os.path.join(local_dir, "metafile.txt")
