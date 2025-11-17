@@ -1,0 +1,32 @@
+[project]
+name = "olguff"
+version = "0.1.0"
+description = "Hugging Face Model Importer for Ollama - Import GGUF models and convert SafeTensor models to GGUF"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+dependencies = [
+    "huggingface_hub>=0.20.0",
+]
+
+[project.optional-dependencies]
+# Optional dependencies for SafeTensor conversion (sftoguff.py)
+convert = [
+    "torch>=2.2.0",
+    "transformers>=4.40.0",
+    "safetensors>=0.4.0",
+]
+
+[project.scripts]
+# Optional: Define entry points if you want to make scripts executable
+# olguff = "main:main"
+# sftoguff = "sftoguff:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+# UV-specific configuration
+dev-dependencies = []

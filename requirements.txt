@@ -1,0 +1,14 @@
+# Core dependencies for olguff
+# For main.py (GGUF model import from Hugging Face)
+huggingface_hub>=0.20.0
+
+# Optional dependencies for sftoguff.py (SafeTensor conversion)
+# Uncomment these if you want to convert SafeTensor models to GGUF:
+# torch>=2.2.0
+# transformers>=4.40.0
+# safetensors>=0.4.0
+
+# To install with optional dependencies:
+# uv pip install -r requirements.txt torch transformers safetensors
+# OR using pyproject.toml:
+# uv pip install -e ".[convert]"
