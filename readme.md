@@ -63,6 +63,12 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
 
 4. Ensure you have the `ollama` command-line tool installed and properly configured.
 
+**CPU-Only Installation (smaller download):**
+   ```sh
+   # Install PyTorch CPU-only version from custom index
+   uv pip install -e ".[convert]" --extra-index-url https://download.pytorch.org/whl/cpu
+   ```
+
 ### Option 2: Using Conda
 
 1. Install the conda environment:
@@ -72,6 +78,14 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
    ```
 
 2. Ensure you have the `ollama` command-line tool installed and properly configured.
+
+**CPU-Only Installation (smaller download):**
+   ```sh
+   # Modify condaenv.yml: add 'cpuonly' package after pytorch line
+   # Then create environment as normal
+   conda env create -f condaenv.yml
+   conda activate olguf
+   ```
 
 ### Option 3: Using pip (Traditional)
 
@@ -95,6 +109,12 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
    ```
 
 3. Ensure you have the `ollama` command-line tool installed and properly configured.
+
+**CPU-Only Installation (smaller download):**
+   ```sh
+   # Install PyTorch CPU-only version from custom index
+   pip install torch transformers safetensors --extra-index-url https://download.pytorch.org/whl/cpu
+   ```
 
 ## Usage
 
