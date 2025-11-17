@@ -8,6 +8,7 @@ license = { text = "MIT" }
 
 dependencies = [
     "huggingface_hub>=0.20.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.optional-dependencies]
