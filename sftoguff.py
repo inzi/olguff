@@ -95,17 +95,16 @@ if dogulffile:
     print(f"Running command: {command}")
     subprocess.run(command, shell=True)
 #python llama.cpp/convert.py local_dir --outfile {model_name}.gguf --outtype q8_0
-mainpy = os.path.join(os.getcwd(),"main.py")
-mainpy = os.path.abspath(mainpy)
-if os.path.exists(mainpy):
+gufftoollama = os.path.join(os.getcwd(),"gufftoollama.py")
+gufftoollama = os.path.abspath(gufftoollama)
+if os.path.exists(gufftoollama):
 
-    proceed = input("Do you want to run import the guff file into ollama? (y/[n]]): ").strip().lower()
+    proceed = input("Do you want to import the GGUF file into Ollama? (y/[n]): ").strip().lower()
     proceed = proceed[0] if proceed else 'n'
 
     if proceed == 'y':
         print (f"GGUF file: {guff_file}")
-        command = f"python {mainpy} {guff_file}"
+        command = f"python {gufftoollama} {guff_file}"
         print (f"Running command: {command}")
         # Run the command to import the GGUF model into Ollama
-        #command = f"ollama create {model_name} -f {model_name}.gguf"
         subprocess.run(command, shell=True)

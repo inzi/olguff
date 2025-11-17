@@ -167,8 +167,9 @@ def main():
     model_name = model_name_input if model_name_input else default_model_name
     command = f"ollama create {model_name} --file {meta_file_path}"
 
-    proceed = input("Do you want to proceed with the 'ollama create' command? (yes/no): ").strip().lower()
-    if proceed == 'yes':
+    proceed = input("Do you want to proceed with the 'ollama create' command? (y/[n]): ").strip().lower()
+    proceed = proceed[0] if proceed else 'n'
+    if proceed == 'y':
         # Prompt the user for a name for the model, defaulting to the model name without the .guff extension
         subprocess.run(command, shell=True)
         print("Model imported successfully!")
