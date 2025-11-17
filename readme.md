@@ -118,6 +118,8 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
 
 ## Usage
 
+> **Note for Windows users**: Use `python` (not `python3`) when running scripts in the conda environment. The `python3` command may point to a different Python installation.
+
 1. Run the script:
    ```sh
    python main.py
