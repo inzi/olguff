@@ -5,16 +5,43 @@ from huggingface_hub import HfApi, hf_hub_download
 from huggingface_hub.utils import RepositoryNotFoundError, EntryNotFoundError
 
 print(f"Current working directory: {os.getcwd()}")
-print(f"You need to ensure you have llama.cpp installed and in your PATH.")
-print(f"Otherwise, set the path to your llama.cpp executable below.")
 
 llamacpp = "llama.cpp/"
-
-llamacppconvert = os.path.join(os.getcwd(),"llama.cpp", "convert_hf_to_gguf.py")
+llamacpp_dir = os.path.join(os.getcwd(), "llama.cpp")
+llamacppconvert = os.path.join(llamacpp_dir, "convert_hf_to_gguf.py")
 llamacppconvert = os.path.abspath(llamacppconvert)
+
 if not os.path.exists(llamacppconvert):
-    print("Error: convert_hf_to_gguf.py not found in llama.cpp directory.")
-    exit(1)
+    print(f"\nllama.cpp not found at: {llamacpp_dir}")
+    print("This tool requires llama.cpp for converting SafeTensor models to GGUF format.")
+
+    clone_repo = input("\nWould you like to clone the llama.cpp repository now? (y/[n]): ").strip().lower()
+    clone_repo = clone_repo[0] if clone_repo else 'n'
+
+    if clone_repo == 'y':
+        print(f"\nCloning llama.cpp repository to {llamacpp_dir}...")
+        try:
+            subprocess.run(["git", "clone", "https://github.com/ggerganov/llama.cpp.git", llamacpp_dir], check=True)
+            print("Successfully cloned llama.cpp!")
+
+            # Verify the converter script exists after cloning
+            if not os.path.exists(llamacppconvert):
+                print(f"Error: convert_hf_to_gguf.py not found after cloning.")
+                print(f"Expected location: {llamacppconvert}")
+                exit(1)
+        except subprocess.CalledProcessError as e:
+            print(f"Error cloning llama.cpp repository: {e}")
+            print("Please clone it manually: git clone https://github.com/ggerganov/llama.cpp.git")
+            exit(1)
+        except FileNotFoundError:
+            print("Error: 'git' command not found. Please install git first.")
+            print("Or clone llama.cpp manually to: " + llamacpp_dir)
+            exit(1)
+    else:
+        print("\nTo use this tool, you need llama.cpp installed.")
+        print(f"Clone it manually to: {llamacpp_dir}")
+        print("Command: git clone https://github.com/ggerganov/llama.cpp.git")
+        exit(1)
 
 # Prompt the user for the model ID
 model_id = input("Enter the Hugging Face model ID: ")
