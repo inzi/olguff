@@ -18,7 +18,7 @@ This project provides a Python script to import a specific model file from a Hug
 
 ## Requirements
 
-- Python 3.x
+- Python 3.10 or higher
 - `huggingface_hub` library
 - `subprocess` module (part of Python standard library)
 - `ollama` command-line tool
@@ -27,14 +27,100 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
 
 ## Installation
 
-1. Install the required Python library:
+### Option 1: Using UV (Recommended)
+
+[UV](https://github.com/astral-sh/uv) is a fast Python package installer and resolver.
+
+1. Install UV if you haven't already:
    ```sh
-   pip install huggingface_hub
+   # On macOS and Linux
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+
+   # On Windows
+   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+   ```
+
+2. Create a virtual environment and install dependencies:
+   ```sh
+   uv venv
+
+   # On macOS/Linux
+   source .venv/bin/activate
+
+   # On Windows
+   .venv\Scripts\activate
+   ```
+
+3. Install the package:
+   ```sh
+   # For main.py only (GGUF import)
+   uv pip install -e .
+
+   # For both main.py and sftoguff.py (includes conversion tools)
+   uv pip install -e ".[convert]"
+
+   # Or using requirements.txt
+   uv pip install -r requirements.txt
+   ```
+
+4. Ensure you have the `ollama` command-line tool installed and properly configured.
+
+**CPU-Only Installation (smaller download):**
+   ```sh
+   # Install PyTorch CPU-only version from custom index
+   uv pip install -e ".[convert]" --extra-index-url https://download.pytorch.org/whl/cpu
+   ```
+
+### Option 2: Using Conda
+
+1. Install the conda environment:
+   ```sh
+   conda env create -f condaenv.yml
+   conda activate olguff
    ```
 
 2. Ensure you have the `ollama` command-line tool installed and properly configured.
 
+**CPU-Only Installation (smaller download):**
+   ```sh
+   # Modify condaenv.yml: add 'cpuonly' package after pytorch line
+   # Then create environment as normal
+   conda env create -f condaenv.yml
+   conda activate olguff
+   ```
+
+### Option 3: Using pip (Traditional)
+
+1. Create a virtual environment (recommended):
+   ```sh
+   python -m venv .venv
+
+   # On macOS/Linux
+   source .venv/bin/activate
+
+   # On Windows
+   .venv\Scripts\activate
+   ```
+
+2. Install the required Python library:
+   ```sh
+   pip install huggingface_hub
+
+   # For sftoguff.py, also install:
+   pip install torch transformers safetensors
+   ```
+
+3. Ensure you have the `ollama` command-line tool installed and properly configured.
+
+**CPU-Only Installation (smaller download):**
+   ```sh
+   # Install PyTorch CPU-only version from custom index
+   pip install torch transformers safetensors --extra-index-url https://download.pytorch.org/whl/cpu
+   ```
+
 ## Usage
+
+> **Note for Windows users**: Use `python` (not `python3`) when running scripts in the conda environment. The `python3` command may point to a different Python installation.
 
 1. Run the script:
    ```sh
