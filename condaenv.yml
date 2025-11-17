@@ -1,4 +1,4 @@
-name: olguf
+name: olguff
 channels:
   - pytorch
   - defaults
@@ -96,4 +96,3 @@ dependencies:
       - urllib3==2.2.2
       - wcwidth==0.2.13
       - yarl==1.9.4
-prefix: C:\Users\chris\anaconda3\envs\olguf

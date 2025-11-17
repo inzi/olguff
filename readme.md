@@ -74,7 +74,7 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
 1. Install the conda environment:
    ```sh
    conda env create -f condaenv.yml
-   conda activate olguf
+   conda activate olguff
    ```
 
 2. Ensure you have the `ollama` command-line tool installed and properly configured.
@@ -84,7 +84,7 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
    # Modify condaenv.yml: add 'cpuonly' package after pytorch line
    # Then create environment as normal
    conda env create -f condaenv.yml
-   conda activate olguf
+   conda activate olguff
    ```
 
 ### Option 3: Using pip (Traditional)
