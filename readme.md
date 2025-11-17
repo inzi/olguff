@@ -23,7 +23,7 @@ This project provides a Python script to import a specific model file from a Hug
 - `subprocess` module (part of Python standard library)
 - `ollama` command-line tool
 
-For sftoguff.py, you'll need llama.cpp installed and functional on your system.
+For SafeTensors conversion, llama.cpp is required but the script will offer to install it automatically.
 
 ## Installation
 
@@ -53,10 +53,10 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
 
 3. Install the package:
    ```sh
-   # For main.py only (GGUF import)
+   # For GGUF import only (minimal installation)
    uv pip install -e .
 
-   # For both main.py and sftoguff.py (includes conversion tools)
+   # For GGUF import + SafeTensors conversion (includes PyTorch, transformers)
    uv pip install -e ".[convert]"
 
    # Or using requirements.txt
@@ -106,7 +106,7 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
    ```sh
    pip install huggingface_hub
 
-   # For sftoguff.py, also install:
+   # For SafeTensors conversion, also install:
    pip install torch transformers safetensors
    ```
 
@@ -122,48 +122,89 @@ For sftoguff.py, you'll need llama.cpp installed and functional on your system.
 
 > **Note for Windows users**: Use `python` (not `python3`) when running scripts in the conda environment. The `python3` command may point to a different Python installation.
 
-1. Run the script:
-   ```sh
-   python main.py
-   ```
+### Quick Start
 
-2. Enter the Hugging Face model ID when prompted.
+Simply run the main script and choose your model type:
 
-3. Select the file you want to download from the list of available files.
+```sh
+python main.py
+```
 
-4. If the file already exists locally, decide whether to redownload it or skip.
+The script will ask you whether you want to import:
+1. **GGUF file** - For models already in GGUF format from Hugging Face
+2. **SafeTensors model** - For models that need to be converted to GGUF first
 
-5. Confirm if you want to run the `ollama create` command:
-   - If yes, provide a name for the model (default is the model name without the `.guff` extension).
-   - If no, the script will print the command for you to run manually after editing the `metafile.txt`.
+Then follow the prompts to complete the import.
 
-### For SafeTensors models like microsoft/Phi-3-mini-128k-instruct
+### For GGUF Models
 
-1. Run the script:
-   ```sh
-   python sftoguff.py
-   ```
+When you select option 1 (GGUF file):
 
-2. Enter the Hugging Face model ID when prompted.
+1. Enter the Hugging Face model ID when prompted
+2. Select the GGUF file you want to download from the list
+3. If the file already exists locally, decide whether to redownload it or skip
+4. Confirm if you want to run the `ollama create` command:
+   - If yes, provide a name for the model
+   - If no, the script will print the command for you to run manually after editing the `metafile.txt`
 
-3. The script will download and convert the model to a .guff file.
+### For SafeTensors Models
 
-4. It will ask you if want to import into ollama, and if so, it'll launch main.py
+When you select option 2 (SafeTensors model):
+
+1. Enter the Hugging Face model ID when prompted
+2. The script will check for llama.cpp and offer to clone it if needed
+3. The entire model repository will be downloaded
+4. The model will be converted to GGUF format using llama.cpp
+5. You'll be asked if you want to import the converted GGUF file into Ollama
+
+### Advanced: Running Scripts Directly
+
+You can also run the individual scripts directly:
+
+**For GGUF files:**
+```sh
+python gufftoollama.py
+
+# Or with a local GGUF file:
+python gufftoollama.py path/to/model.gguf
+```
+
+**For SafeTensors conversion:**
+```sh
+python sftoguff.py
+```
 
 
 ## Example
 
 ```sh
 $ python main.py
-Enter the Hugging Face model ID: bert-base-uncased
+============================================================
+Ollama Model Importer
+============================================================
+
+This tool helps you import Hugging Face models into Ollama.
+
+What type of model do you want to import?
+1. GGUF file (already in GGUF format)
+2. SafeTensors model (will be converted to GGUF)
+
+Enter your choice (1 or 2): 1
+
+============================================================
+Starting GGUF to Ollama import...
+============================================================
+
+Enter the Hugging Face model ID: TheBloke/Llama-2-7B-GGUF
 Available files in the repository:
-1. config.json
-2. pytorch_model.bin
-3. vocab.txt
-Enter the number of the file you want to download: 2
-File 'pytorch_model.bin' already exists. Do you want to redownload it? (yes/no): no
-Do you want to proceed with the 'ollama create' command? (yes/no): yes
-Enter the name for the model (default: pytorch_model): my_custom_model
+1. .gitattributes
+2. README.md
+3. llama-2-7b.Q4_K_M.gguf
+4. llama-2-7b.Q5_K_M.gguf
+...
+Enter the number of the file you want to download: 3
+Enter the Ollama name for the model (default: llama-2-7b.Q4_K_M): llama2-7b
+Do you want to proceed with the 'ollama create' command? (y/[n]): y
 Model imported successfully!
 ```
 
