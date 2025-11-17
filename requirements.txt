@@ -1,6 +1,7 @@
 # Core dependencies for olguff
 # For main.py (GGUF model import from Hugging Face)
 huggingface_hub>=0.20.0
+python-dotenv>=1.0.0
 
 # Optional dependencies for sftoguff.py (SafeTensor conversion)
 # Uncomment these if you want to convert SafeTensor models to GGUF:

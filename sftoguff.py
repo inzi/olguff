@@ -3,11 +3,21 @@ import subprocess
 import webbrowser
 from huggingface_hub import HfApi, hf_hub_download
 from huggingface_hub.utils import RepositoryNotFoundError, EntryNotFoundError
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 print(f"Current working directory: {os.getcwd()}")
 
-llamacpp = "llama.cpp/"
-llamacpp_dir = os.path.join(os.getcwd(), "llama.cpp")
+# Get llama.cpp path from environment or use default
+llamacpp_dir = os.getenv("LLAMACPP_PATH")
+if llamacpp_dir:
+    llamacpp_dir = os.path.abspath(os.path.expanduser(llamacpp_dir))
+    print(f"Using llama.cpp path from .env: {llamacpp_dir}")
+else:
+    llamacpp_dir = os.path.join(os.getcwd(), "llama.cpp")
+
 llamacppconvert = os.path.join(llamacpp_dir, "convert_hf_to_gguf.py")
 llamacppconvert = os.path.abspath(llamacppconvert)
 

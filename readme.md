@@ -116,6 +116,27 @@ For SafeTensors conversion, llama.cpp is required but the script will offer to i
    pip install torch transformers safetensors --extra-index-url https://download.pytorch.org/whl/cpu
    ```
 
+## Configuration (Optional)
+
+You can customize the tool's behavior by creating a `.env` file in the project root:
+
+```sh
+# Copy the example file
+cp .env.example .env
+
+# Edit .env to set your preferences
+```
+
+**Available settings:**
+- `LLAMACPP_PATH` - Custom path to llama.cpp installation (if not using default `./llama.cpp`)
+- `GGUF_DOWNLOAD_DIR` - Custom directory for GGUF downloads (default: `./dl`)
+- `SAFETENSORS_DOWNLOAD_DIR` - Custom directory for SafeTensors downloads (default: `./sf`)
+
+Example `.env`:
+```
+LLAMACPP_PATH=/usr/local/llama.cpp
+```
+
 ## Usage
 
 > **Note for Windows users**: Use `python` (not `python3`) when running scripts in the conda environment. The `python3` command may point to a different Python installation.
